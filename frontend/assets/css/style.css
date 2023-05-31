@@ -1,0 +1,146 @@
+@import url("https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;600;700;800&display=swap");
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --clr-white: #fff;
+    --clr-black: #000;
+    --clr-bg: #0a0a0a;
+    --clr-primary: var(--bs-indigo);
+    --clr-light-primary: #7633e3;
+
+    --fs-h1: clamp(2.4rem, 4vw, 3.25rem);
+    --fs-h2: clamp(2rem, 4vw, 2.6rem);
+    --fs-h3: clamp(1.825rem, 4vw, 2rem);
+    --fs-h4: clamp(1.5rem, 4vw, 1.825rem);
+    --fs-h5: clamp(1rem, 4vw, 1.5rem);
+    --fs-h6: clamp(0.825rem, 4vw, 1rem);
+    --fs-text: clamp(0.825rem, 4vw, 1rem);
+
+    --transition: all 0.3s ease-in-out;
+}
+body {
+    color-scheme: dark;
+    font-size: var(--fs-text);
+    font-weight: 400;
+    line-height: 1.5;
+    font-family: "Mukta", sans-serif;
+}
+
+h1,
+h2,
+h3 {
+    font-weight: 700;
+}
+h4,
+h5,
+h6 {
+    font-weight: 600;
+}
+h1 {
+    font-size: var(--fs-h1);
+}
+h2 {
+    font-size: var(--fs-h2);
+}
+h3 {
+    font-size: var(--fs-h3);
+}
+h4 {
+    font-size: var(--fs-h4);
+}
+h5 {
+    font-size: var(--fs-h5);
+}
+h6 {
+    font-size: var(--fs-h6);
+}
+p {
+    margin-bottom: 1rem;
+}
+p:last-of-type {
+    margin-bottom: 0;
+}
+a {
+    font-weight: 500;
+    color: var(--clr-white);
+    text-decoration: none;
+    transition: var(--transition);
+}
+a:hover {
+    color: var(--clr-primary);
+}
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+img,
+svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+.btn {
+    --bs-btn-border-radius: 100vmax;
+}
+.btn-primary {
+    --bs-btn-bg: var(--clr-primary);
+    --bs-btn-border-color: var(--clr-primary);
+    --bs-btn-hover-border-color: var(--clr-light-primary);
+    --bs-btn-hover-bg: var(--clr-light-primary);
+}
+
+#page {
+    display: flex;
+    flex-flow: column;
+    min-height: 100vh;
+}
+#page .main-content {
+    flex: 1;
+}
+
+.site-header {
+    padding: 1rem 0;
+}
+.header-inner {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    align-items: center;
+}
+.main-navigation .menu {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+.site-footer {
+    padding: 1rem 0;
+    text-align: center;
+    color: var(--clr-white);
+}
+.site-brand {
+    color: var(--clr-primary);
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.links-list li:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+.user-info .user-avatar img {
+    aspect-ratio: 1 / 1;
+    inline-size: 100%;
+    max-width: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--clr-primary);
+}
