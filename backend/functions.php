@@ -62,14 +62,23 @@ function validate_user(string $name, string $username, string $email, string $pa
     return $message;
 }
 
-function register_user(string $name, string $username, string $email, string $pass, string $confirm_pass)
+function register_user($name, $user_avatar, $username,  $email,  $pass,  $confirm_pass)
 {
     global $con;
 
     $message = [];
 
-    $stmt = $con->prepare("INSERT INTO users(user_name, user_login,user_email, user_pass, user_confirm_pass) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param('sssss', $name, $username, $email, $pass, $confirm_pass);
+    $pname = rand(1000, 10000) . '-' . $user_avatar['name'];
+    $tname = $user_avatar['tmp_name'];
+    $upload_dir =  'frontend/uploads/';
+
+    // user id
+    $id = rand(time(), 10000000);
+
+    move_uploaded_file($tname, $upload_dir . $pname);
+
+    $stmt = $con->prepare("INSERT INTO users(user_id, user_name,user_avatar, user_login,user_email, user_pass, user_confirm_pass) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param('issssss', $id, $name, $pname, $username, $email, $pass, $confirm_pass);
 
     if ($stmt->execute()) {
         $message['success'] = "User Registered Successfully";
@@ -140,6 +149,26 @@ function check_is_login()
     if (!is_login()) {
         header('Location: ' . ABSPATH . '/login');
     }
+}
+
+function is_admin()
+{
+    global $con;
+
+    $stmt = $con->prepare('SELECT user_role FROM user_roles WHERE user_id = ?');
+    $stmt->bind_param('i', $_SESSION['user_id']);
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows == 0)
+        return false;
+
+    $data =  $result->fetch_array(MYSQLI_ASSOC);
+    if ($data['user_role'] == 'admin') :
+        return true;
+    endif;
+    return false;
 }
 
 function post_user_link($title, $url, $userid)
@@ -216,6 +245,50 @@ function delete_link($linkid)
 
     $stmt->execute();
 }
+
+
+function get_total_users()
+{
+    global $con;
+
+    $stmt = $con->prepare('SELECT * FROM users');
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    return $result->num_rows;
+}
+function get_total_link_count()
+{
+    global $con;
+
+    $stmt = $con->prepare('SELECT * FROM links');
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    return $result->num_rows;
+}
+
+function get_all_users_data()
+{
+    global $con;
+
+    $stmt = $con->prepare('SELECT * FROM users');
+
+    if ($stmt->execute()) {
+        $result = $stmt->get_result();
+        $data =  $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    return $data;
+}
+
+function get_formated_date($date_string)
+{
+    $dateTime = new DateTime($date_string);
+    $formattedDate = $dateTime->format('D m Y');
+    return $formattedDate;
+}
+
 function pre_print($value)
 {
     echo '<pre>';

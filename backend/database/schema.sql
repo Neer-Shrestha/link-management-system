@@ -21,3 +21,10 @@ CREATE TABLE IF NOT EXISTS links(
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
+CREATE TABLE IF NOT EXISTS user_roles(
+    role_id int PRIMARY KEY AUTO_INCREMENT,
+    user_id int,
+    user_role VARCHAR(25) DEFAULT 'user',
+    FOREIGN KEY (role_id) REFERENCES users(role_id)
+);
+

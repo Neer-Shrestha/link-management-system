@@ -50,30 +50,6 @@ $user_data = get_user_data($user_id);
 
             </div>
             <div class="col-md-6">
-                <h2 class="h4 mb-4">Add links</h2>
-                <form method="post" action="<?php echo get_root_directory_uri(); ?>/addlink" class="row gy-4" autocomplete="off">
-                    <div class="col-12">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" name="link_title" id="link_title" placeholder="Eg. Linkme" required>
-                            <label for="link_title">Title</label>
-                            <?php if (isset($msg['username'])) : ?>
-                                <span class="text-danger">
-                                    <?php echo $msg['username']; ?>
-                                </span>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                    <div class="col-12 ">
-                        <div class="form-floating">
-                            <input type="url" class="form-control" name="link_url" id="link_url" placeholder="Password" required>
-                            <label for="link_url">Url</label>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <button class="w-100 btn btn-lg btn-primary" type="submit">Add Link</button>
-                    </div>
-                </form>
-
                 <?php if ($links) : ?>
                     <h2 class="mt-5 h4 mb-4">My links</h2>
                     <ul class="links-list">
@@ -82,7 +58,7 @@ $user_data = get_user_data($user_id);
                                 <a href="<?php echo $row['link_content']; ?>" class="btn flex-grow-1 btn-primary me-2" target="_blank"><?php echo $row['link_title']; ?></a>
                                 <a class="btn btn-primary p-2" href="<?php echo ABSPATH; ?>/delete?id=<?php echo urlencode($row['link_id']); ?>" aria-label="delete">
                                     <svg width="20" height="20" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12 38c0 2.21 1.79 4 4 4h16c2.21 0 4-1.79 4-4V14H12v24zM38 8h-7l-2-2H19l-2 2h-7v4h28V8z" fill="var(--bs-danger)" />
+                                        <path d="M12 38c0 2.21 1.79 4 4 4h16c2.21 0 4-1.79 4-4V14H12v24zM38 8h-7l-2-2H19l-2 2h-7v4h28V8z" fill="var(--clr-white)" />
                                         <path d="M0 0h48v48H0z" fill="none" />
                                     </svg>
                                 </a>
