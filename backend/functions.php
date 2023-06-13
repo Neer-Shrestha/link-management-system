@@ -66,14 +66,15 @@ function register_user($name, $user_avatar, $username,  $email,  $pass,  $confir
 {
     global $con;
 
+    // user id
+    $id = rand(time(), 10000000);
+
     $message = [];
 
     $pname = rand(1000, 10000) . '-' . $user_avatar['name'];
     $tname = $user_avatar['tmp_name'];
     $upload_dir =  'frontend/uploads/';
 
-    // user id
-    $id = rand(time(), 10000000);
 
     move_uploaded_file($tname, $upload_dir . $pname);
 
